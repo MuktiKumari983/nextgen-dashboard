@@ -37,7 +37,6 @@ export function BentoGrid({ courses }: { courses: Course[] }) {
       variants={containerVariants}
       initial="hidden"
       animate="show"
-      {/* Fixed: Changing auto-rows settings to scale elegantly across tablet viewports */}
       className="grid grid-cols-1 gap-4 p-4 md:p-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-max lg:auto-rows-[minmax(160px,_auto)] max-w-7xl mx-auto w-full pb-24 md:pb-6"
     >
       {/* HERO TILE */}
@@ -62,7 +61,6 @@ export function BentoGrid({ courses }: { courses: Course[] }) {
       <motion.section 
         variants={itemVariants} 
         {...cardHoverProps}
-        {/* Fixed: Restricting row span behavior explicitly to desktop sizes to prevent clamping on tablet */}
         className="bg-neutral-950 border border-neutral-900 rounded-3xl p-6 md:col-span-2 lg:col-span-1 lg:row-span-2 flex flex-col justify-between overflow-hidden relative transition-colors duration-300 min-h-[220px]"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-transparent opacity-40 pointer-events-none" />

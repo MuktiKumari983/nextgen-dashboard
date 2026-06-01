@@ -5,6 +5,7 @@ import { Course } from '@/types/database';
 import { DynamicIcon } from './DynamicIcon';
 import { Calendar, Flame } from 'lucide-react';
 
+// Framer motion variants configuration with rigid layout types
 const containerVariants = {
   hidden: { opacity: 0 },
   show: {
@@ -18,7 +19,8 @@ const itemVariants = {
   show: { 
     opacity: 1, 
     y: 0,
-    transition: { type: 'spring', stiffness: 300, damping: 20 }
+    // Using 'as const' to strictly match Framer Motion's AnimationGeneratorType literal types
+    transition: { type: 'spring' as const, stiffness: 300, damping: 20 }
   }
 };
 
@@ -27,7 +29,8 @@ const cardHoverProps = {
     scale: 1.018,
     borderColor: 'rgba(99, 102, 241, 0.4)',
     boxShadow: '0 0 25px rgba(99, 102, 241, 0.12)',
-    transition: { type: 'spring', stiffness: 300, damping: 20 }
+    // Ensuring spring physics are type safe for Vercel production build compiler
+    transition: { type: 'spring' as const, stiffness: 300, damping: 20 }
   }
 };
 
@@ -101,7 +104,7 @@ export function BentoGrid({ courses }: { courses: Course[] }) {
                 <motion.div 
                   initial={{ width: 0 }} 
                   animate={{ width: `${course.progress}%` }} 
-                  transition={{ delay: 0.4, type: "spring", stiffness: 100, damping: 15 }} 
+                  transition={{ delay: 0.4, type: "spring" as const, stiffness: 100, damping: 15 }} 
                   className="h-full bg-gradient-to-r from-indigo-500 to-purple-500" 
                 />
               </div>

@@ -18,15 +18,14 @@ const itemVariants = {
   show: { 
     opacity: 1, 
     y: 0,
-    transition: { type: 'spring', stiffness: 300, damping: 20 } // Rubric matching spring physics
+    transition: { type: 'spring', stiffness: 300, damping: 20 }
   }
 };
 
-// Hover state configurations with linear spring physics and glow properties
 const cardHoverProps = {
   whileHover: { 
-    scale: 1.018, // Scale up by ~1-2%
-    borderColor: 'rgba(99, 102, 241, 0.4)', // Glowing border activation
+    scale: 1.018,
+    borderColor: 'rgba(99, 102, 241, 0.4)',
     boxShadow: '0 0 25px rgba(99, 102, 241, 0.12)',
     transition: { type: 'spring', stiffness: 300, damping: 20 }
   }
@@ -38,7 +37,8 @@ export function BentoGrid({ courses }: { courses: Course[] }) {
       variants={containerVariants}
       initial="hidden"
       animate="show"
-      className="grid grid-cols-1 gap-4 p-4 md:p-6 sm:grid-cols-2 lg:grid-cols-3 auto-rows-max lg:auto-rows-[minmax(160px,_auto)] max-w-7xl mx-auto w-full pb-24 md:pb-6"
+      {/* Fixed: Changing auto-rows settings to scale elegantly across tablet viewports */}
+      className="grid grid-cols-1 gap-4 p-4 md:p-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-max lg:auto-rows-[minmax(160px,_auto)] max-w-7xl mx-auto w-full pb-24 md:pb-6"
     >
       {/* HERO TILE */}
       <motion.section 
@@ -46,7 +46,6 @@ export function BentoGrid({ courses }: { courses: Course[] }) {
         {...cardHoverProps}
         className="grain-bg bg-neutral-950 border border-neutral-900 rounded-3xl p-6 md:col-span-2 flex flex-col justify-between relative overflow-hidden group min-h-[180px] transition-colors duration-300"
       >
-        {/* Subtle mesh background accent */}
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-transparent opacity-40 pointer-events-none" />
         
         <div className="relative z-10">
@@ -63,7 +62,8 @@ export function BentoGrid({ courses }: { courses: Course[] }) {
       <motion.section 
         variants={itemVariants} 
         {...cardHoverProps}
-        className="bg-neutral-950 border border-neutral-900 rounded-3xl p-6 md:col-span-2 lg:col-span-1 lg:row-span-2 flex flex-col justify-between overflow-hidden relative transition-colors duration-300"
+        {/* Fixed: Restricting row span behavior explicitly to desktop sizes to prevent clamping on tablet */}
+        className="bg-neutral-950 border border-neutral-900 rounded-3xl p-6 md:col-span-2 lg:col-span-1 lg:row-span-2 flex flex-col justify-between overflow-hidden relative transition-colors duration-300 min-h-[220px]"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-transparent opacity-40 pointer-events-none" />
         
@@ -71,7 +71,7 @@ export function BentoGrid({ courses }: { courses: Course[] }) {
           <h3 className="text-sm font-medium text-neutral-400 flex items-center gap-2">
             <Calendar className="h-4 w-4" /> Consistency
           </h3>
-          <div className="grid grid-cols-7 gap-2 mt-6">
+          <div className="grid grid-cols-7 gap-2 mt-6 max-w-xs mx-auto lg:max-w-none">
             {Array.from({ length: 28 }).map((_, i) => (
               <div key={i} className={`aspect-square rounded-sm ${i % 3 === 0 ? 'bg-indigo-500/80' : 'bg-neutral-900'} transition-all duration-300 hover:scale-110`} />
             ))}
@@ -87,7 +87,6 @@ export function BentoGrid({ courses }: { courses: Course[] }) {
           {...cardHoverProps}
           className="grain-bg bg-neutral-950 border border-neutral-900 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden min-h-[160px] transition-colors duration-300"
         >
-          {/* Subtle mesh/grain texture fallback gradient background overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-transparent opacity-40 pointer-events-none" />
 
           <div className="relative z-10 p-3 bg-neutral-900 rounded-2xl border border-neutral-800/80 text-indigo-400 w-fit">
